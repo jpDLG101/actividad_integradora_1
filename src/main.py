@@ -5,13 +5,13 @@ from lcs import longest_common_substring
 
 def main():
     transmissions = [
-        read_clean("examples/transmission1.txt"),
-        read_clean("examples/transmission2.txt"),
+        read_clean("transmission1.txt"),
+        read_clean("transmission2.txt"),
     ]
     mcodes = [
-        read_clean("examples/mcode1.txt"),
-        read_clean("examples/mcode2.txt"),
-        read_clean("examples/mcode3.txt"),
+        read_clean("mcode1.txt"),
+        read_clean("mcode2.txt"),
+        read_clean("mcode3.txt"),
     ]
 
     for transmission in transmissions:

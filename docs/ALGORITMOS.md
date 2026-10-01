@@ -44,14 +44,17 @@ for i in 1..len(s)-1:
 best_len = 0, best_start = 0
 for i in 0..len(a)-1:
     pi = prefix_function(a[i:] + '#' + b)
-    L = max(pi[len(a)-i+1:])          # solo la parte de b
+    L = max(pi[len(a)-i+1:], default=0)          # solo la parte de b
     if L > best_len: best_len, best_start = L, i   # '>' estricto => primera aparición
-resultado (1-indexed): best_start + 1, best_start + best_len
+si best_len == 0: resultado (0, 0)
+si no: resultado (best_start + 1, best_start + best_len)
 ```
 
 `#` no está en el alfabeto, así que ningún borde puede cruzarlo.
 
-**Complejidad:** O(n · (n + m)). Aceptable para el tamaño de las pruebas de la actividad.
+**Complejidad:** O(n · (n + m)) tiempo y O(n + m) espacio auxiliar. Cada iteración descarta la tabla anterior. Si alguna cadena está vacía se devuelve `(0, 0)` directamente.
+
+Ejemplos: `XABCDEY` y `ZZBCDEQ` comparten `BCDE`, posiciones `(3, 6)` en la primera. Para `ABC#XABY`, la tabla es `[0,0,0,0,0,1,2,0]`; la zona de `b` comienza en el índice 4 y su máximo es 2.
 
 ## Notas de posiciones
 Internamente todo es 0-indexed; la conversión a 1-indexed se hace **solo** al devolver/imprimir (`+1`).
