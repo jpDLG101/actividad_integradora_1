@@ -1,4 +1,4 @@
-"""Pruebas de Parte 3; KMP se integra cuando esté disponible."""
+"""Pruebas de Parte 3 con KMP y lectura de archivos reales."""
 
 from pathlib import Path
 import sys
@@ -9,15 +9,9 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 
-def setUpModule():
-    global _best_prefix_match, longest_common_substring, prefix_function
-    if not (ROOT / "src" / "kmp.py").exists():
-        # Una copia temporal puede suministrarse por PYTHONPATH al validar.
-        import importlib.util
-        if importlib.util.find_spec("kmp") is None:
-            raise unittest.SkipTest("Pendiente src/kmp.py de Parte 1")
-    from kmp import prefix_function
-    from lcs import _best_prefix_match, longest_common_substring
+from kmp import prefix_function
+from lcs import _best_prefix_match, longest_common_substring
+from io_utils import read_clean
 
 
 class PrefixMatchTests(unittest.TestCase):
@@ -75,16 +69,23 @@ class LongestCommonSubstringTests(unittest.TestCase):
         self.assertEqual(longest_common_substring("A" * 2000, "A" * 2000), (1, 2000))
         self.assertLess(perf_counter() - start, 10)
 
-    @unittest.skipUnless((ROOT / "src" / "io_utils.py").exists(),
-                         "Pendiente read_clean de Parte 1")
     def test_files_with_read_clean(self):
-        from io_utils import read_clean
         fixture = ROOT / "tests" / "fixtures" / "integration"
         a = read_clean(str(fixture / "transmission1.txt"))
         b = read_clean(str(fixture / "transmission2.txt"))
         self.assertEqual(a, "0ABACDEF")
         self.assertEqual(b, "9ABAFDEF")
         self.assertEqual(longest_common_substring(a, b), (2, 4))
+
+    def test_team_examples_with_read_clean(self):
+        examples = ROOT / "examples"
+        a = read_clean(str(examples / "transmission1.txt"))
+        b = read_clean(str(examples / "transmission2.txt"))
+        self.assertEqual(a, "0123456789ABCDE")
+        self.assertEqual(b, "FEDCB9876543210")
+        # Ordenes inversos: solo comparten caracteres individuales.
+        # El primer inicio en a corresponde a '0'.
+        self.assertEqual(longest_common_substring(a, b), (1, 1))
 
 
 if __name__ == "__main__":

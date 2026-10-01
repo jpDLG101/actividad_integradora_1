@@ -30,7 +30,6 @@ Orden: (t1,m1), (t1,m2), (t1,m3), (t2,m1), (t2,m2), (t2,m3).
 3. Si hay varios substrings comunes con la longitud máxima, se reporta el que inicia primero en transmission1.
 4. Un `mcode` vacío (archivo vacío) se considera no contenido (`false`).
 5. Si el palíndromo más largo tiene longitud 1 (no hay ninguno "real"), se reporta `1 1` por el primer caracter, aunque se asume que no ocurre.
-
 6. Si no existe substring común, o alguna transmisión está vacía, la Parte 3 reporta `0 0`.
 
 ## Restricciones

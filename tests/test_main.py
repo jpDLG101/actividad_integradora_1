@@ -11,20 +11,27 @@ FIXTURE = ROOT / "tests" / "fixtures" / "integration"
 # 123 está ausente. ABA es el mayor palíndromo en ambas (2..4).
 # ABA y DEF empatan como substring común; gana ABA (2..4 en t1).
 EXPECTED_STDOUT = "true 2\ntrue 6\nfalse\ntrue 2\ntrue 6\nfalse\n2 4\n2 4\n2 4\n"
-REQUIRED = ("main.py", "kmp.py", "io_utils.py", "manacher.py")
+# t1: 0123456789ABCDE; t2: FEDCB9876543210. Solo t1 contiene
+# 56789 (posición 6). No hay palíndromos mayores a un carácter;
+# tampoco substrings comunes de largo > 1. Gana la posición 1.
+EXAMPLES_STDOUT = "true 6\nfalse\nfalse\nfalse\nfalse\nfalse\n1 1\n1 1\n1 1\n"
 
 
 class MainTests(unittest.TestCase):
-    @unittest.skipUnless(all((ROOT / "src" / name).exists() for name in REQUIRED),
-                         "Pendientes módulos de Partes 1 y 2")
-    def test_nine_lines_from_files(self):
+    def assert_output(self, directory, expected):
         result = subprocess.run(
             [sys.executable, str(ROOT / "src" / "main.py")],
-            cwd=FIXTURE, capture_output=True, text=True, timeout=10,
+            cwd=directory, capture_output=True, text=True, timeout=10,
         )
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(result.stderr, "")
-        self.assertEqual(result.stdout, EXPECTED_STDOUT)
+        self.assertEqual(result.stdout, expected)
+
+    def test_nine_lines_from_files(self):
+        self.assert_output(FIXTURE, EXPECTED_STDOUT)
+
+    def test_nine_lines_from_team_examples(self):
+        self.assert_output(ROOT / "examples", EXAMPLES_STDOUT)
 
 
 if __name__ == "__main__":
