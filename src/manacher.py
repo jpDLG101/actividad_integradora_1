@@ -18,3 +18,8 @@ def longest_palindrome(s: str) -> tuple[int, int]:
         if i + P[i] > right:
             center = i
             right = i + P[i]
+
+    r = max(P)
+    i = P.index(r)  # index devuelve el primero en caso de empate
+    start = (i - r) // 2
+    return (start + 1, start + r)
