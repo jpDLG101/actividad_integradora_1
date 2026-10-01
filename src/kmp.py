@@ -34,3 +34,10 @@ def kmp_search(text: str, pattern: str) -> int | None:
             return i - len(pattern) + 2  # +1 para 1-index
 
     return None
+
+
+def format_result(pos: int | None) -> str:
+    """Formatea el resultado de búsqueda sin imprimirlo."""
+    if pos is None:
+        return "false"
+    return f"true {pos}"
