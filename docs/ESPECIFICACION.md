@@ -1,12 +1,14 @@
 # Especificación
 
 ## Entrada
-No hay entrada del usuario. El programa lee 5 archivos de nombre fijo, ubicados en el directorio donde se ejecuta:
+No hay entrada del usuario. El programa siempre se ejecuta desde la raíz del proyecto (`python src/main.py`) y lee 5 archivos de nombre fijo en esa misma raíz, por lo que en `main.py` los nombres van pelones (`"transmission1.txt"`, no `"examples/transmission1.txt"`):
 
 - `transmission1.txt`, `transmission2.txt`: datos enviados de un dispositivo a otro.
 - `mcode1.txt`, `mcode2.txt`, `mcode3.txt`: código malicioso que puede aparecer dentro de una transmisión.
 
 Alfabeto: `0-9`, `A-F` (mayúsculas) y saltos de línea.
+
+Los archivos de ejemplo del equipo viven en `examples/` (versionados), y de ahí los usan los tests automatizados. Para correr `main.py` a mano, copia temporalmente los 5 a la raíz con sus nombres reales y bórralos al terminar.
 
 ## Salida (en este orden, una línea cada una)
 
