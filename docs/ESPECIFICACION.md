@@ -31,6 +31,8 @@ Orden: (t1,m1), (t1,m2), (t1,m3), (t2,m1), (t2,m2), (t2,m3).
 4. Un `mcode` vacío (archivo vacío) se considera no contenido (`false`).
 5. Si el palíndromo más largo tiene longitud 1 (no hay ninguno "real"), se reporta `1 1` por el primer caracter, aunque se asume que no ocurre.
 
+6. Si no existe substring común, o alguna transmisión está vacía, la Parte 3 reporta `0 0`.
+
 ## Restricciones
 - Solo se usan **KMP** y **Manacher**. Nada de `str.find`, `in`, `re`, ni programación dinámica para resolver las partes.
 - Sin librerías externas.
