@@ -13,3 +13,24 @@ def prefix_function(s: str) -> list[int]:
         pi[i] = k
 
     return pi
+
+
+def kmp_search(text: str, pattern: str) -> int | None:
+    """Devuelve la primera posición 1-index de pattern en text, si existe."""
+    if not pattern or len(pattern) > len(text):
+        return None
+
+    pi = prefix_function(pattern)
+    k = 0  # Cantidad de caracteres del patrón emparejados.
+
+    for i in range(len(text)):
+        while k > 0 and text[i] != pattern[k]:
+            k = pi[k - 1]
+
+        if text[i] == pattern[k]:
+            k += 1
+
+        if k == len(pattern):
+            return i - len(pattern) + 2  # +1 para 1-index
+
+    return None
