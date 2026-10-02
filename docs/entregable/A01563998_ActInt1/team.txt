@@ -1,0 +1,10 @@
+Equipo:
+
+Juan Pablo de León - A01563998
+Hizo la parte de los palíndromos (Manacher) y armó el programa principal que junta todo y lo imprime.
+
+Ricardo Becerra - A01564070
+Hizo la parte de buscar el código malicioso (KMP) y la parte que lee los archivos.
+
+Fabian Fuentes - A01569349
+Hizo la parte de encontrar el pedazo de texto más parecido entre las dos transmisiones, y dejó la documentación final lista.
